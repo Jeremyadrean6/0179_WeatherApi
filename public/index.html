@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation</title>
+</head>
+
+<body>
+
+    <h3>Nama : Jeremy adrean </h3>
+    <h3>NIM : 20240140179 </h3>
+
+    <p>
+        Lokasi :
+        <input type="text" id="inputLokasi" placeholder="Masukkan kota">
+        <button onclick="cariLokasi()">Cari</button>
+    </p>
+
+    <hr>
+
+    <p>
+        Kota :
+        <span id="lokasi"></span>
+    </p>
+
+    <hr>
+
+    <p>
+        Negara :
+        <span id="negara"></span>
+    </p>
+    
+    <hr>
+
+    <p>
+        Provinsi :
+        <span id="provinsi"></span>
+    </p>
+
+    <hr>
+
+    <p>
+        Kecamatan :
+        <span id="kecamatan"></span>
+    </p>
+
+    <hr>
+
+    <p>
+        Latitude :
+        <span id="latitude"></span>
+    </p>
+
+    <p>
+        Longitude :
+        <span id="longitude"></span>
+    </p>
+
+
+    <script>
+
+        function cariLokasi() {
+
+            const kota = document.getElementById("inputLokasi").value;
+
+            fetch("/api/lokasi?kota=" + kota)
+                .then(response => response.json())
+                .then(data => {
+
+                    console.log(data);
+
+                    document.getElementById("lokasi").innerHTML =
+                        data.kota;
+
+                    document.getElementById("negara").innerHTML =
+                        data.negara;
+
+                    document.getElementById("provinsi").innerHTML =
+                        data.provinsi;
+
+                    document.getElementById("kecamatan").innerHTML =
+                        data.kecamatan;
+
+                    document.getElementById("latitude").innerHTML =
+                        data.latitude;
+
+                    document.getElementById("longitude").innerHTML =
+                        data.longitude;
+
+                })
+                .catch(error => {
+
+                    console.error(error);
+
+                });
+
+        }
+
+    </script>
+
+</body>
+</html>
